@@ -2,11 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDisplayName</key>
+	<string>InSite</string>
 	<key>NSCameraUsageDescription</key>
-	<string>accessIC uses the camera for visual localization and optional AR guidance.</string>
+	<string>InSite uses the camera for visual localization and optional AR guidance.</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>accessIC talks to the campus localization service on your local network.</string>
+	<string>InSite talks to the campus localization service on your local network.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>accessIC does not record audio; this key is unused.</string>
+	<string>InSite does not record audio; this key is unused.</string>
 </dict>
 </plist>

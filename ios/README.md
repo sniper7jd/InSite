@@ -1,4 +1,4 @@
-# accessIC iOS client (Stage 1)
+# InSite iOS client (Stage 1)
 
 SwiftUI + ARKit + RealityKit sources for the Whalen Center first-floor prototype.
 
@@ -7,7 +7,7 @@ SwiftUI + ARKit + RealityKit sources for the Whalen Center first-floor prototype
 ## Create the Xcode project (Mac)
 
 1. Xcode → **File → New → Project → App**
-2. Product name: `accessIC`
+2. Product name: `InSite`
 3. Interface: **SwiftUI**, Language: **Swift**, minimum deployment: **iOS 17.0**
 4. Save under this repo as `ios/accessIC.xcodeproj` (or keep the generated folder and replace its sources with the files in `ios/accessIC/`)
 5. Delete the template `ContentView.swift` / `*App.swift` if they conflict, then add every file under `ios/accessIC/` to the app target
@@ -18,8 +18,8 @@ SwiftUI + ARKit + RealityKit sources for the Whalen Center first-floor prototype
 
 | Key | Value |
 |-----|--------|
-| `NSCameraUsageDescription` | accessIC uses the camera for visual localization and optional AR guidance. |
-| `NSLocalNetworkUsageDescription` | accessIC talks to the campus localization service on your local network. |
+| `NSCameraUsageDescription` | InSite uses the camera for visual localization and optional AR guidance. |
+| `NSLocalNetworkUsageDescription` | InSite talks to the campus localization service on your local network. |
 | `NSAppTransportSecurity` | Prefer HTTPS (Cloudflare tunnel). For temporary HTTP lab use only, add an exception you will remove before demo day. |
 
 Enable **Augmented Reality** capability if Xcode prompts for it.
