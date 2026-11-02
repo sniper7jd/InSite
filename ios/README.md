@@ -9,8 +9,8 @@ SwiftUI + ARKit + RealityKit sources for the Whalen Center first-floor prototype
 1. Xcode → **File → New → Project → App**
 2. Product name: `InSite`
 3. Interface: **SwiftUI**, Language: **Swift**, minimum deployment: **iOS 17.0**
-4. Save under this repo as `ios/accessIC.xcodeproj` (or keep the generated folder and replace its sources with the files in `ios/accessIC/`)
-5. Delete the template `ContentView.swift` / `*App.swift` if they conflict, then add every file under `ios/accessIC/` to the app target
+4. Save under this repo as `ios/InSite.xcodeproj` (or keep the generated folder and replace its sources with the files in `ios/InSite/`)
+5. Delete the template `ContentView.swift` / `*App.swift` if they conflict, then add every file under `ios/InSite/` to the app target
 6. Add `Resources/whalen_floor1_graph.prototype.json` to the target (Copy Bundle Resources)
 7. Add a unit-test target and include `Tests/PoseAlignerTests.swift`
 

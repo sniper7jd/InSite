@@ -1,6 +1,6 @@
 import XCTest
 import simd
-@testable import accessIC
+@testable import InSite
 
 final class PoseAlignerTests: XCTestCase {
     let aligner = PoseAligner()

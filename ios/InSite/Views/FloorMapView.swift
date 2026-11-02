@@ -39,7 +39,7 @@ struct FloorMapView: View {
                     .padding()
                 }
             }
-            .navigationTitle("accessIC")
+            .navigationTitle("InSite")
             .navigationBarTitleDisplayMode(.inline)
         }
     }

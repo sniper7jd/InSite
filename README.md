@@ -1,6 +1,6 @@
-# accessIC: Markerless Indoor Accessible Navigation
+# InSite: Markerless Indoor Accessible Navigation
 
-accessIC combines Structure-from-Motion (SfM) visual positioning with client-side pathfinding for step-free indoor routes without beacons, QR codes, or indoor GPS.
+InSite combines Structure-from-Motion (SfM) visual positioning with client-side pathfinding for step-free indoor routes without beacons, QR codes, or indoor GPS.
 
 **Current prototype scope:** Whalen Center first floor only. Business School / H&S / outdoor links are future graph extensions after Whalen localization and routing are trustworthy.
 
@@ -42,9 +42,9 @@ T_W_from_M = T_W_from_A · C_A_from_C · inverse(T_M_from_C)
 ## 2. Repository layout
 
 ```text
-accessIC/
+InSite/
 ├── backend/                 # Pointer docs; live code stays on the GPU host
-├── ios/accessIC/            # Stage 1 Swift sources (add to a Mac-created Xcode app)
+├── ios/InSite/            # Stage 1 Swift sources (add to a Mac-created Xcode app)
 ├── shared/api/
 │   └── localize.schema.json # Frozen Python ↔ Swift contract
 └── README.md
@@ -85,7 +85,7 @@ See [`shared/api/localize.schema.json`](shared/api/localize.schema.json).
 1. Preserve GPU backend baseline.
 2. Freeze response contract to `localize.schema.json`.
 3. Establish metric scale (Stray odometry + measured lengths).
-4. Create Xcode app on a Mac; add `ios/accessIC` sources; run on a physical iPhone.
+4. Create Xcode app on a Mac; add `ios/InSite` sources; run on a physical iPhone.
 5. Capture one `ARFrame` (image + intrinsics + `T_W_from_A`); upload; parse status explicitly.
 6. Verify one surveyed AR anchor via `PoseAligner`.
 7. Add verified floor graph + accessible routing (2D first).

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://accessic.local/schemas/localize.schema.json",
-  "title": "accessIC POST /localize response",
+  "$id": "https://insite.local/schemas/localize.schema.json",
+  "title": "InSite POST /localize response",
   "description": "Frozen contract shared by the GPU FastAPI service and the iOS client. transform_matrix_map_from_camera is authoritative (T_M_from_C). Quaternion order is xyzw.",
   "oneOf": [
     { "$ref": "#/$defs/success" },

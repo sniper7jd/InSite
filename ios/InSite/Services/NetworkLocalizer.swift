@@ -81,7 +81,7 @@ struct NetworkLocalizer: LocalizerClient {
         request.httpMethod = "POST"
         request.timeoutInterval = AppConfig.requestTimeoutSeconds
 
-        let boundary = "accessic-\(UUID().uuidString)"
+        let boundary = "insite-\(UUID().uuidString)"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         if let token = authToken?.trimmingCharacters(in: .whitespacesAndNewlines), !token.isEmpty {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

@@ -1,6 +1,6 @@
-# accessIC backend (GPU)
+# InSite backend (GPU)
 
-The live reconstruction and FastAPI `/localize` service run on the remote NVIDIA GPU host (`accessIC-backend` on Lambda). That codebase is the source of truth for HLoc, COLMAP, and inference.
+The live reconstruction and FastAPI `/localize` service run on the remote NVIDIA GPU host (`InSite-backend` on Lambda). That codebase is the source of truth for HLoc, COLMAP, and inference.
 
 ## Do not rewrite from this repo
 
@@ -9,7 +9,7 @@ This directory is a pointer only. Keep the working GPU pipeline as the baseline.
 ## Expected local layout on the GPU machine
 
 ```text
-accessIC-backend/
+InSite-backend/
 ├── dataset/
 ├── outputs/whalen_floor1/
 ├── main.py
