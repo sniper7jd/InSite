@@ -82,24 +82,24 @@ struct RouteEngine: Sendable {
         guard dist[goalID] != nil else { throw RouteEngineError.noPath }
 
         var pathIDs = [goalID]
+        var pathEdges: [GraphEdge] = []
         var current = goalID
         while current != startID {
             guard let step = prev[current] else { throw RouteEngineError.noPath }
             pathIDs.append(step.node)
+            pathEdges.append(step.edge)
             current = step.node
         }
         pathIDs.reverse()
+        pathEdges.reverse()
 
         let nodes = pathIDs.compactMap { graph.node(id: $0) }
         var steps: [RouteStep] = []
         var total: Float = 0
         var hasMeasured = true
-        for i in 0..<(nodes.count - 1) {
+        for (i, edge) in pathEdges.enumerated() {
             let a = nodes[i]
             let b = nodes[i + 1]
-            guard let edge = graph.edges.first(where: {
-                ($0.from == a.id && $0.to == b.id) || ($0.from == b.id && $0.to == a.id)
-            }) else { continue }
             if let len = edge.lengthMeters {
                 total += len
             } else {
