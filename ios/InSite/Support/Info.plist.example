@@ -8,7 +8,5 @@
 	<string>InSite uses the camera for visual localization and optional AR guidance.</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>InSite talks to the campus localization service on your local network.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>InSite does not record audio; this key is unused.</string>
 </dict>
 </plist>

@@ -1,12 +1,28 @@
-# InSite: Markerless Indoor Accessible Navigation
+# InSite
 
-InSite combines Structure-from-Motion (SfM) visual positioning with client-side pathfinding for step-free indoor routes without beacons, QR codes, or indoor GPS.
+**Step-free indoor navigation from a single phone photo — no beacons, QR codes, or indoor GPS.**
 
-**Current prototype scope:** Whalen Center first floor only. Business School / H&S / outdoor links are future graph extensions after Whalen localization and routing are trustworthy.
+GPS stops working at the front door, and most indoor maps don't know where the stairs are. For wheelchair users that means guessing which hallway has a ramp or an elevator. InSite takes a photo from an iPhone, figures out exactly where you are inside the building, and routes you along paths with no steps.
+
+<!--
+Add visuals here — they are the first thing visitors look at:
+![InSite route on the 2D floor map](docs/images/map-route.png)
+![Sparse COLMAP reconstruction of Whalen Center, floor 1](docs/images/whalen-pointcloud.png)
+-->
+
+## How it works
+
+1. **Locate:** the iPhone sends one camera frame (plus lens intrinsics and its ARKit pose) to a GPU server.
+2. **Match:** the server matches it against a 3D map of the building built with Structure-from-Motion (SuperPoint → NetVLAD → LightGlue → PnP) and returns the camera's pose in the map.
+3. **Route:** the app aligns the map to the ARKit world, runs accessibility-aware Dijkstra on a floor graph that skips stairs, and guides you on a 2D map, with spoken directions and optional AR.
+
+**Tech:** Swift · SwiftUI · ARKit · RealityKit · Python · FastAPI · COLMAP · hloc · SuperPoint · LightGlue · NVIDIA A100
+
+**Status:** research prototype covering the first floor of Whalen Center (Ithaca College). Live localization works end-to-end on test images; metric scale and on-device verification are next. See [milestones](#milestone-status).
 
 ---
 
-## 1. System architecture
+## System architecture
 
 ```text
 [iPhone]
@@ -39,20 +55,21 @@ T_W_from_M = T_W_from_A · C_A_from_C · inverse(T_M_from_C)
 
 ---
 
-## 2. Repository layout
+## Repository layout
 
 ```text
 InSite/
-├── backend/                 # Pointer docs; live code stays on the GPU host
-├── ios/InSite/            # Stage 1 Swift sources (add to a Mac-created Xcode app)
-├── shared/api/
-│   └── localize.schema.json # Frozen Python ↔ Swift contract
-└── README.md
+├── backend/          # GPU localization service notes (HLoc / COLMAP / FastAPI)
+├── ios/InSite/       # SwiftUI + ARKit client sources and unit tests
+├── shared/api/       # localize.schema.json — the Python ↔ Swift contract, with examples
+└── docs/ROADMAP.md   # Implementation order and demo integrity rules
 ```
+
+To run the iOS client, see [`ios/README.md`](ios/README.md).
 
 ---
 
-## 3. API contract
+## API contract
 
 See [`shared/api/localize.schema.json`](shared/api/localize.schema.json).
 
@@ -64,7 +81,7 @@ See [`shared/api/localize.schema.json`](shared/api/localize.schema.json).
 
 ---
 
-## 4. Milestone status
+## Milestone status
 
 | Phase | Milestone | Status | Notes |
 |-------|-----------|--------|-------|
@@ -73,29 +90,17 @@ See [`shared/api/localize.schema.json`](shared/api/localize.schema.json).
 | 3 | SfM map construction | Complete | Sparse COLMAP model |
 | 4 | Live `/localize` | Complete (preliminary) | 21/21 batch; ~166 avg inliers; ~6.3 s — **not** proof of absolute accuracy |
 | 5 | Metric scale + map version | Not started | Required before physical AR anchors |
-| 6 | iOS client Stage 1 shell | In progress (this repo) | Mock UI only until contract + scale + device verification |
+| 6 | iOS client shell | In progress | Mock UI only until contract + scale + device verification |
 | 7 | Accessible 2D / voice | Pending | After verified graph |
 
 **Batch test snapshot (preliminary):** 21 success / 0 fail, avg inliers 165.8, avg latency 6.315 s. These pass the API success criteria on the current test set; they do not establish navigation-grade absolute positioning.
 
----
+Scope is Whalen Center first floor only. The Business School, H&S, and outdoor links are future graph extensions once Whalen localization and routing are trustworthy. Next steps are in [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
-## 5. Implementation order
+## Team
 
-1. Preserve GPU backend baseline.
-2. Freeze response contract to `localize.schema.json`.
-3. Establish metric scale (Stray odometry + measured lengths).
-4. Create Xcode app on a Mac; add `ios/InSite` sources; run on a physical iPhone.
-5. Capture one `ARFrame` (image + intrinsics + `T_W_from_A`); upload; parse status explicitly.
-6. Verify one surveyed AR anchor via `PoseAligner`.
-7. Add verified floor graph + accessible routing (2D first).
-8. Accessibility polish; then profile GPU latency.
+Built by [@sniper7jd](https://github.com/sniper7jd) and Himaloy Mondal.
 
----
+## License
 
-## 6. Honest demo rules
-
-- Mock localization is for UI/routing development only and must stay visibly labeled.
-- Do not claim a virtual object is aligned with a physical doorway until measured on site.
-- Do not describe unverified graph edges as accessible.
-- Prefer a clear “Locating…” and failure path over a fast but misaligned arrow.
+[MIT](LICENSE)

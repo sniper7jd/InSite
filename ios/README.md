@@ -2,7 +2,7 @@
 
 SwiftUI + ARKit + RealityKit sources for the Whalen Center first-floor prototype.
 
-**This Linux environment cannot compile or run the app.** Create the Xcode project on your Mac, add these sources, and verify on a physical iPhone.
+The Xcode project is not committed yet. Create it on a Mac, add these sources, and run on a physical iPhone (ARKit requires real hardware).
 
 ## Create the Xcode project (Mac)
 
@@ -12,7 +12,7 @@ SwiftUI + ARKit + RealityKit sources for the Whalen Center first-floor prototype
 4. Save under this repo as `ios/InSite.xcodeproj` (or keep the generated folder and replace its sources with the files in `ios/InSite/`)
 5. Delete the template `ContentView.swift` / `*App.swift` if they conflict, then add every file under `ios/InSite/` to the app target
 6. Add `Resources/whalen_floor1_graph.prototype.json` to the target (Copy Bundle Resources)
-7. Add a unit-test target and include `Tests/PoseAlignerTests.swift`
+7. Add a unit-test target and include `Tests/PoseAlignerTests.swift` and `Tests/RouteEngineTests.swift`
 
 ### Info.plist / target capabilities
 
@@ -49,7 +49,7 @@ Enable **Augmented Reality** capability if Xcode prompts for it.
 5. Physical AR anchors stay disabled until `units == "meters"` and Mock is off.
 6. `whalen_floor1_graph.prototype.json` is schematic UI data (`data_state: ui_prototype`), not surveyed Whalen coordinates.
 7. Scope is Whalen Center 1st floor only — not Business School / H&S.
-8. An Xcode project must be created on a Mac; this environment cannot claim a device build.
+8. An Xcode project must be created on a Mac; device builds have not been verified yet.
 9. NetworkLocalizer already posts the frozen multipart fields; the GPU must accept them in Stage 2.
 10. Capture currently prefers a live `ARFrame` when the AR tab has run; otherwise a placeholder JPEG is used for mock/UI flow.
 
@@ -58,7 +58,7 @@ Enable **Augmented Reality** capability if Xcode prompts for it.
 - [ ] App builds in Xcode on a physical iPhone
 - [ ] Camera permission and AR session start without the GPU
 - [ ] Mock localize updates 2D status and never claims physical doorway alignment
-- [ ] `PoseAlignerTests` pass in the unit-test target
+- [ ] `PoseAlignerTests` and `RouteEngineTests` pass in the unit-test target
 - [ ] No Business School / H&S navigation claims in UI copy
 
 ## Next stages (not done here)
